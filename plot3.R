@@ -1,4 +1,4 @@
-## set wd for user setwd() ?
+
 ## Script assumes datafile named "household_power_consumption.txt" 
 ## is downloaded and extracted to your working directory
 ## An alternative (not used) is to read the data from just those dates
@@ -15,22 +15,20 @@ Feb1 <- consumption[consumption$Date == "1/2/2007", ]
 Feb2 <- consumption[consumption$Date == "2/2/2007", ]
 Feb1n2 <- rbind(Feb1, Feb2)
 
-## convert Date and Time variables to Date/Time classes in R using 
-## the strptime() and as.Date() functions, add to data in its own column
+## Using alternative to converting date/time for labels, this code not essential
+     ## convert Date and Time variables to Date/Time classes in R using 
+     ## the strptime() and as.Date() functions, add to data in its own column
+     ## Feb1n2$Date <- as.Date(Feb1n2$Date, "%d/%m/%Y")   
+     ## date format needs capital Y, year with century
+     ## Adding a date/time column to combine date/time format so duplicate hours
+     ## are tagged with date.  This is not used on plot 3.
 
-## Following Date conversion not used for plot 2
-## Feb1n2$Date <- as.Date(Feb1n2$Date, "%d/%m/%Y")   
-## date format needs capital Y, year with century
-
-## Adding a date/time column to combine date/time format so duplicate hours
-## are tagged with date.  This is not used on plot 2.
-
-## Feb1n2$DateTime <- paste(Feb1n2$Date, Feb1n2$Time)
-## Feb1n2$DateTime <- strptime(Feb1n2$DateTime, "%Y-%m-%d %H:%M:%S")
+     ## Feb1n2$DateTime <- paste(Feb1n2$Date, Feb1n2$Time)
+     ## Feb1n2$DateTime <- strptime(Feb1n2$DateTime, "%Y-%m-%d %H:%M:%S")
 
 ## Construct line overlay plot - this code will output to screen device first
 
-par(mar=c(6,4,4,6))
+par(mar=c(6,6,4,4))
 ## par(new = TRUE)     # this allows each successive plot on same graph
 
 plot(Feb1n2$Sub_metering_1, type = "n", xaxt = "n", xlab = "", ylab = "Energy sub metering")
