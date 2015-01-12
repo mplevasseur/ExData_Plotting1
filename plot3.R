@@ -26,10 +26,10 @@ Feb1n2 <- rbind(Feb1, Feb2)
      ## Feb1n2$DateTime <- paste(Feb1n2$Date, Feb1n2$Time)
      ## Feb1n2$DateTime <- strptime(Feb1n2$DateTime, "%Y-%m-%d %H:%M:%S")
 
+
 ## Construct line overlay plot - this code will output to screen device first
 
 par(mar=c(6,6,4,4))
-## par(new = TRUE)     # this allows each successive plot on same graph
 
 plot(Feb1n2$Sub_metering_1, type = "n", xaxt = "n", xlab = "", ylab = "Energy sub metering")
 #xaxt suppresses x labels for now, yaxt = n in the plots leaves original y axis label
@@ -39,6 +39,8 @@ lines(Feb1n2$Sub_metering_2, col = "red", yaxt = "n")
 lines(Feb1n2$Sub_metering_3, col = "blue", yaxt = "n")
 
 axis(1, at = c(0, 1440, 2880), labels = c("Thurs", "Fri", "Sat"))
+## axis() puts labels back in at the day transition points by row number 
+## Determined by subsetting days separately above
 
 legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
        lty = 1, col = c("black", "red" , "blue"), cex = 0.6)
@@ -47,4 +49,6 @@ legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
 ## Name each of the plot files as plot3
 
 dev.copy(png, file = "plot3.png", width=480, height=480) 
-dev.off() 
+dev.off()
+## Using dev.copy instead of png() did affect the result of the plot, but 
+## not considered significant. I use png() for the final plot, #4
