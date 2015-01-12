@@ -30,7 +30,7 @@ Feb1n2 <- rbind(Feb1, Feb2)
 
 ## Construct histogram - this code will output to screen device first
 
-par(mar=c(6,4,4,2)) 
+par(mar=c(6,5,4,1)) 
 hist(Feb1n2$Global_active_power, col = "red", ylim = c(0,1200),
      xaxp = c(0,6,3),    # this command sets the x-axis scale based on intervals
      main = "Global Active Power" , 
